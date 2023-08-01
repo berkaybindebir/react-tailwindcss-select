@@ -3,6 +3,7 @@ import React from "react";
 import Item from "./Item";
 import { useSelectContext } from "./SelectProvider";
 import { GroupOption } from "./type";
+import { twMerge } from "tailwind-merge";
 
 interface GroupItemProps {
     item: GroupOption;
@@ -20,11 +21,10 @@ const GroupItem: React.FC<GroupItemProps> = ({ item, primaryColor }) => {
                         <>{formatGroupLabel(item)}</>
                     ) : (
                         <div
-                            className={
+                            className={twMerge(
+                                "pr-2 py-2 cursor-default select-none truncate font-bold text-gray-700",
                                 classNames?.listGroupLabel
-                                    ? classNames.listGroupLabel
-                                    : "pr-2 py-2 cursor-default select-none truncate font-bold text-gray-700"
-                            }
+                            )}
                         >
                             {item.label}
                         </div>

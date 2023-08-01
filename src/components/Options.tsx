@@ -7,6 +7,7 @@ import GroupItem from "./GroupItem";
 import Item from "./Item";
 import { SelectContext } from "./SelectProvider";
 import { Option, Options as ListOption } from "./type";
+import { twMerge } from "tailwind-merge";
 
 interface OptionsProps {
     list: ListOption;
@@ -92,10 +93,7 @@ const Options: React.FC<OptionsProps> = ({
     }, [filterByText, removeValues]);
 
     return (
-        <div
-            role="options"
-            className={classNames && classNames.list ? classNames.list : "max-h-72 overflow-y-auto"}
-        >
+        <div role="options" className={twMerge("max-h-72 overflow-y-auto", classNames?.list)}>
             {filterResult.map((item, index) => (
                 <React.Fragment key={index}>
                     {"options" in item ? (

@@ -5,6 +5,7 @@ import { COLORS, DEFAULT_THEME, THEME_DATA } from "../constants";
 import DisabledItem from "./DisabledItem";
 import { useSelectContext } from "./SelectProvider";
 import { Option } from "./type";
+import { twMerge } from "tailwind-merge";
 
 interface ItemProps {
     item: Option;
@@ -46,9 +47,7 @@ const Item: React.FC<ItemProps> = ({ item, primaryColor }) => {
             ? `text-white ${bgColor}`
             : `text-gray-500 ${bgHoverColor} ${textHoverColor}`;
 
-        return classNames && classNames.listItem
-            ? classNames.listItem({ isSelected })
-            : `${baseClass} ${selectedClass}`;
+        return twMerge(baseClass, selectedClass, classNames?.listItem?.({ isSelected }));
     }, [bgColor, bgHoverColor, classNames, isSelected, textHoverColor]);
 
     return (
@@ -65,8 +64,8 @@ const Item: React.FC<ItemProps> = ({ item, primaryColor }) => {
                         <li
                             tabIndex={0}
                             onKeyDown={(e: React.KeyboardEvent<HTMLLIElement>) => {
-                                if (e.key === ' ' || e.key === 'Enter') {
-                                    handleValueChange(item)
+                                if (e.key === " " || e.key === "Enter") {
+                                    handleValueChange(item);
                                 }
                             }}
                             aria-selected={isSelected}
